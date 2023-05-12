@@ -41,7 +41,7 @@ jobs:
     steps:
       - id: set_concat
         run: |
-          echo CONCAT="${needs.define-variables.outputs.label_type}"-"${needs.define-variables.outputs.app_name}" >> "${GITHUB_ENV}"
+          echo CONCAT="$(needs.define-variables.outputs.label_type)"-"$(needs.define-variables.outputs.app_name)" >> "${GITHUB_ENV}"
       - id: test_if
         if: ${{ !contains(github.event.pull_request.labels.*.name, github.env.CONCAT) }}
         run: |
