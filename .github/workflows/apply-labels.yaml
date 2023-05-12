@@ -38,8 +38,9 @@ jobs:
     name: Test if statement
     runs-on: ubuntu-latest
     needs: define-variables
-    if: ${{ needs.define-variables.outputs.label_type == 'deploy' && needs.define-variables.outputs.app_name == 'index' }}
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'index') }}
     steps:
       - id: test_if
         run: |
+          echo github.event.pull_request.labels
           echo "This ran..."
