@@ -42,5 +42,5 @@ jobs:
     steps:
       - id: test_if
         run: |
-          echo github.event.pull_request.labels
+          echo ${{ github.event.pull_request.labels }}
           echo "This ran..."
