@@ -38,7 +38,7 @@ jobs:
     name: Test if statement
     runs-on: ubuntu-latest
     needs: define-variables
-    if: ${{ needs.define-variables.outputs.label_type == 'index' }}
+    if: ${{ needs.define-variables.outputs.label_type == 'deploy' }}
     steps:
       - id: test_if
         run: |
