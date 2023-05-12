@@ -34,24 +34,23 @@ jobs:
   #         echo "app_name: ${{ needs.define-variables.outputs.app_name }}"
 
   # Test if statement
-  # test-if:
-  #   name: Test if statement
-  #   runs-on: ubuntu-latest
-  #   needs: define-variables
-  #   if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy / index') }}
-  #   steps:
-  #     - id: test_if
-  #       run: |
-  #         echo ${{ github.event.pull_request.labels }}
-  #         echo "This ran..."
-
-  # Test env concatenation
-  test-concat:
-    name: Test concatenation of env variables
+  test-if:
+    name: Test if statement
     runs-on: ubuntu-latest
     needs: define-variables
-    env:
-      CONCAT: deployed / ${{ needs.define-variables.outputs.label_type }}-${{ needs.define-variables.outputs.app_name }}
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'deploy / index') }}
     steps:
-      - id: echo_concat
-        run: echo $CONCAT
+      - id: test_if
+        run: |
+          echo "This ran..."
+
+  # Test env concatenation
+  # test-concat:
+  #   name: Test concatenation of env variables
+  #   runs-on: ubuntu-latest
+  #   needs: define-variables
+  #   env:
+  #     CONCAT: deployed / ${{ needs.define-variables.outputs.label_type }}-${{ needs.define-variables.outputs.app_name }}
+  #   steps:
+  #     - id: echo_concat
+  #       run: echo $CONCAT
