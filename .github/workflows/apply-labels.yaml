@@ -16,11 +16,11 @@ jobs:
       - id: set_label_type
         name: Set Label Type
         run: |
-          echo "label_type=$(echo ${{ github.event.label.name }} | awk '{split($0,a,"/"); print a[1]}')" >> "${GITHUB_OUTPUT}"
+          echo "label_type=$(echo ${{ github.event.label.name }} | awk '{split($0,a," / "); print a[1]}')" >> "${GITHUB_OUTPUT}"
       - id: set_app_name
         name: Set App Name
         run: |
-          echo "app_name=$(echo ${{ github.event.label.name }} | awk '{split($0,a,"/"); print a[2]}')" >> "${GITHUB_OUTPUT}"
+          echo "app_name=$(echo ${{ github.event.label.name }} | awk '{split($0,a," / "); print a[2]}')" >> "${GITHUB_OUTPUT}"
 
     # Echo the output variables
   echo-variables:
