@@ -46,7 +46,7 @@ jobs:
         run: |
           echo "This ran..."
           echo concat: ${{ github.env.CONCAT }}
-          echo label: ${{ github.event.label }}
+          echo label: ${{ github.event.label.name }}
 
   # Test env concatenation
   # test-concat:
