@@ -43,11 +43,13 @@ jobs:
         run: |
           echo CONCAT=${{ needs.define-variables.outputs.label_type }} / ${{ needs.define-variables.outputs.app_name }} >> "${GITHUB_OUTPUT}"
       - id: test_if
-        if: ${{ !contains(github.event.pull_request.labels.*.name, github.env.CONCAT) }}
+        if: ${{ !contains(github.event.pull_request.labels.*.name, steps.set_concat.outputs.CONCAT) }}
         run: |
-          echo "This ran..."
-          echo concat: ${{ steps.set_concat.outputs.CONCAT }}
-          echo label: ${{ github.event.label.name }}
+          echo "The label is not there..."
+      - id: test_else
+        if: ${{ contains(github.event.pull_request.labels.*.name, steps.set_concat.outputs.CONCAT) }}
+        run: |
+          echo "The label is there..."
 
   # Test env concatenation
   # test-concat:
