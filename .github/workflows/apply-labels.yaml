@@ -22,14 +22,24 @@ jobs:
         run: |
           echo "app_name=$(echo ${{ github.event.label.name }} | awk '{split($0,a," / "); print a[2]}')" >> "${GITHUB_OUTPUT}"
 
-    # Echo the output variables
-  echo-variables:
-    name: Echo output variables
+  # Echo the output variables
+  # echo-variables:
+  #   name: Echo output variables
+  #   runs-on: ubuntu-latest
+  #   needs: define-variables
+  #   steps:
+  #     - id: echo_variables
+  #       run: |
+  #         echo "label_type: ${{ needs.define-variables.outputs.label_type }}"
+  #         echo "app_name: ${{ needs.define-variables.outputs.app_name }}"
+
+  # Test if statement
+  test-if:
+    name: Test if statement
     runs-on: ubuntu-latest
     needs: define-variables
+    if: ${{ needs.define-variables.outputs.label_type == 'index' }}
     steps:
-      - id: echo_variables
+      - id: test_if
         run: |
-          echo "label_type: ${{ needs.define-variables.outputs.label_type }}"
-          echo "app_name: ${{ needs.define-variables.outputs.app_name }}"
-  
+          echo "This ran..."
